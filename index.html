@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline';">
+    <title>NOVACORE | Streetwear & Footwear Store</title>
+    <style>
+        :root {
+            --bg-dark: #090a0f;
+            --card-bg: #12151f;
+            --card-border: #1f2436;
+            --accent: #00f0ff;
+            --accent-hover: #00c4d1;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --whatsapp: #25D366;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        header {
+            background: rgba(9, 10, 15, 0.9);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--card-border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.6rem;
+            font-weight: 900;
+            letter-spacing: 3px;
+            color: #fff;
+            text-transform: uppercase;
+            text-shadow: 0 0 15px rgba(0, 240, 255, 0.4);
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .header-contact {
+            background: var(--whatsapp);
+            color: #000;
+            font-weight: 700;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: transform 0.2s;
+        }
+
+        .header-contact:active {
+            transform: scale(0.95);
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 3.5rem 5% 2.5rem;
+            background: radial-gradient(circle at top, #161d31 0%, var(--bg-dark) 70%);
+        }
+
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            margin-bottom: 0.8rem;
+            text-transform: uppercase;
+        }
+
+        .hero p {
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto 1.8rem;
+            font-size: 0.95rem;
+        }
+
+        /* Filtres */
+        .filters {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            padding: 0 5% 2rem;
+        }
+
+        .filter-btn {
+            background: var(--card-bg);
+            color: var(--text-main);
+            border: 1px solid var(--card-border);
+            padding: 0.6rem 1.2rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.25s ease;
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background: var(--accent);
+            color: #000;
+            border-color: var(--accent);
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
+        }
+
+        /* Grille des produits */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 1.5rem;
+            padding: 0 5% 4rem;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .product-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 14px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+        }
+
+        .img-container {
+            width: 100%;
+            height: 270px;
+            background: #1a1e2e;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .product-card:hover .img-container img {
+            transform: scale(1.05);
+        }
+
+        .badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(9, 10, 15, 0.85);
+            color: var(--accent);
+            padding: 0.3rem 0.7rem;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            border: 1px solid var(--accent);
+        }
+
+        .product-info {
+            padding: 1.2rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            justify-content: space-between;
+        }
+
+        .product-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin-bottom: 0.4rem;
+            color: #fff;
+        }
+
+        .product-price {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .order-btn {
+            display: block;
+            width: 100%;
+            text-align: center;
+            background: transparent;
+            color: var(--text-main);
+            border: 1px solid var(--accent);
+            padding: 0.75rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: all 0.25s ease;
+        }
+
+        .order-btn:hover {
+            background: var(--accent);
+            color: #000;
+        }
+
+        /* Footer & Réseaux */
+        footer {
+            background: #06070a;
+            border-top: 1px solid var(--card-border);
+            padding: 3rem 5% 2rem;
+            text-align: center;
+        }
+
+        .footer-title {
+            font-size: 1.3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+        }
+
+        .socials {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-link {
+            background: var(--card-bg);
+            color: var(--text-main);
+            border: 1px solid var(--card-border);
+            padding: 0.7rem 1.3rem;
+            border-radius: 10px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: border-color 0.2s;
+        }
+
+        .social-link:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .copyright {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 1.7rem; }
+            .products-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 1rem; }
+            .img-container { height: 190px; }
+            .product-info { padding: 0.9rem; }
+            .product-title { font-size: 0.9rem; }
+            .product-price { font-size: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">NOVA<span>CORE</span></div>
+        <a href="https://wa.me/22373708006?text=Bonjour%20NOVACORE,%20je%20souhaite%20avoir%20des%20informations%20sur%20vos%20articles." target="_blank" rel="noopener noreferrer" class="header-contact">WhatsApp Direct</a>
+    </header>
+
+    <section class="hero">
+        <h1>L'Élite du Streetwear</h1>
+        <p>Collections exclusives, outfits complets, mules tendance et accessoires. Commande rapide et livraison sécurisée.</p>
+    </section>
+
+    <div class="filters">
+        <button class="filter-btn active" onclick="filterProducts('all', this)">Tout voir</button>
+        <button class="filter-btn" onclick="filterProducts('paires', this)">Paires & Mules</button>
+        <button class="filter-btn" onclick="filterProducts('outfits', this)">Outfits Complets</button>
+        <button class="filter-btn" onclick="filterProducts('pulls', this)">Pulls & Hoodies</button>
+        <button class="filter-btn" onclick="filterProducts('tshirts', this)">T-Shirts & Sacs</button>
+    </div>
+
+    <main class="products-grid" id="catalog">
+        <!-- Le catalogue est généré automatiquement et de façon sécurisée par le script ci-dessous -->
+    </main>
+
+    <footer>
+        <div class="footer-title">NOVA<span>CORE</span></div>
+        <div class="socials">
+            <a href="https://wa.me/22373708006" target="_blank" rel="noopener noreferrer" class="social-link">WhatsApp : +223 73 70 80 06</a>
+            <a href="https://www.snapchat.com/add/Anot_boy34" target="_blank" rel="noopener noreferrer" class="social-link">Snapchat : Anot_boy34</a>
+            <a href="https://www.instagram.com/SEVEN_BLOOD45" target="_blank" rel="noopener noreferrer" class="social-link">Instagram : @SEVEN_BLOOD45</a>
+        </div>
+        <p class="copyright">&copy; 2026 NOVACORE. Tous droits réservés.</p>
+    </footer>
+
+    <script>
+        const WHATSAPP_NUMBER = "22373708006";
+
+        const products = [
+            // Paires (15 000 FCFA)
+            { name: "Mules Daim Noir Boucle Croix", price: "15 000 FCFA", category: "paires", tag: "Paires", img: "paire-croix-noire.jpg" },
+            { name: "Mules Flammes Blanches", price: "15 000 FCFA", category: "paires", tag: "Paires", img: "paire-flammes.jpg" },
+            { name: "Mules Squelette Noir & Blanc", price: "15 000 FCFA", category: "paires", tag: "Paires", img: "paire-squelette.jpg" },
+            { name: "Mules Beige Croix Violettes", price: "15 000 FCFA", category: "paires", tag: "Paires", img: "paire-croix-violette.jpg" },
+            { name: "Mules Crânes & Toile Beige", price: "15 000 FCFA", category: "paires", tag: "Paires", img: "paire-cranes.jpg" },
+            { name: "Mules Taupe Toile d'Araignée", price: "15 000 FCFA", category: "paires", tag: "Paires", img: "paire-araignee.jpg" },
+            { name: "Mules Monogramme Marron", price: "15 000 FCFA", category: "paires", tag: "Paires", img: "paire-marron.jpg" },
+            { name: "Mules Tissage Ethnique Rouge", price: "15 000 FCFA", category: "paires", tag: "Paires", img: "paire-rouge.jpg" },
+            { name: "Mules Tissage Multicolore", price: "15 000 FCFA", category: "paires", tag: "Paires", img: "paire-tissu-beige.jpg" },
+
+            // Outfits complets (20 000 - 25 000 FCFA)
+            { name: "Outfit Complet Zippé - Noir", price: "20 000 - 25 000 FCFA", category: "outfits", tag: "Ensemble", img: "outfit-noir.jpg" },
+            { name: "Outfit Complet Zippé - Marron", price: "20 000 - 25 000 FCFA", category: "outfits", tag: "Ensemble", img: "outfit-marron.jpg" },
+            { name: "Outfit Complet Zippé - Beige", price: "20 000 - 25 000 FCFA", category: "outfits", tag: "Ensemble", img: "outfit-beige.jpg" },
+            { name: "Outfit Complet Zippé - Vert Sapin", price: "20 000 - 25 000 FCFA", category: "outfits", tag: "Ensemble", img: "outfit-vert.jpg" },
+            { name: "Outfit Complet Zippé - Gris Clair", price: "20 000 - 25 000 FCFA", category: "outfits", tag: "Ensemble", img: "outfit-gris.jpg" },
+
+            // Pulls simples (8 000 - 10 000 FCFA)
+            { name: "Hoodie TYZER x NT Street Evolution", price: "8 000 - 10 000 FCFA", category: "pulls", tag: "Pull", img: "pull-tyzer-1.jpg" },
+            { name: "Hoodie TYZER x NT Two Minds", price: "8 000 - 10 000 FCFA", category: "pulls", tag: "Pull", img: "pull-tyzer-2.jpg" },
+
+            // T-shirts & Accessoires (5 000 FCFA)
+            { name: "T-Shirt NOVACORE Pattern", price: "5 000 FCFA", category: "tshirts", tag: "T-Shirt", img: "tshirt-nova.jpg" },
+            { name: "Sacoche Crossbody Noir Croix", price: "5 000 FCFA", category: "tshirts", tag: "Accessoire", img: "sacoche-noire.jpg" }
+        ];
+
+        const catalogContainer = document.getElementById("catalog");
+
+        function renderProducts(filter = "all") {
+            catalogContainer.innerHTML = "";
+            const filtered = filter === "all" ? products : products.filter(p => p.category === filter);
+
+            filtered.forEach(item => {
+                const card = document.createElement("article");
+                card.className = "product-card";
+
+                const message = encodeURIComponent(`Bonjour NOVACORE ! Je souhaite commander l'article suivant : ${item.name} (${item.price}). Est-il disponible ?`);
+                const waLink = `https://wa.me/${WHATSAPP_NUMBER}?text=${message}`;
+
+                card.innerHTML = `
+                    <div class="img-container">
+                        <span class="badge">${item.tag}</span>
+                        <img src="${item.img}" alt="${item.name}" loading="lazy">
+                    </div>
+                    <div class="product-info">
+                        <div>
+                            <h2 class="product-title">${item.name}</h2>
+                            <div class="product-price">${item.price}</div>
+                        </div>
+                        <a href="${waLink}" target="_blank" rel="noopener noreferrer" class="order-btn">Commander sur WhatsApp</a>
+                    </div>
+                `;
+                catalogContainer.appendChild(card);
+            });
+        }
+
+        function filterProducts(category, btnElement) {
+            document.querySelectorAll(".filter-btn").forEach(btn => btn.classList.remove("active"));
+            btnElement.classList.add("active");
+            renderProducts(category);
+        }
+
+        // Initialisation au chargement
+        renderProducts();
+    </script>
+</body>
+</html>
